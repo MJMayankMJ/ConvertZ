@@ -14,28 +14,32 @@ struct ContentView: View {
     
     let temperatureTypes = ["°C", "°F", "°K"]
     var outputValue : Double {
+    var input = inputValue
+        //this is done to prevent "Modifying state during view update, this will cause undefined behavior." error
+        //u cant change state property at the runtime u can change it before but not at runtime (atleast thats what i think it is)
+        //so just creat a seperate var instead
         
         if inputTemperatureType == "°C" {
-            inputValue = inputValue
+            
         }
         else if inputTemperatureType == "°F" {
-            inputValue = (inputValue - 32) * (5 / 9)
+            input = (input - 32) * (5 / 9)
         }
         else if inputTemperatureType == "°K" {
-            inputValue = inputValue - 273.15
+            input = input - 273.15
         }
         else {
             print("error")
         }
         
         if outputTemperatureType == "°C" {
-            return inputValue
+            return input
         }
         else if outputTemperatureType == "°F" {
-            return ((inputValue * (9/5)) + 32)
+            return ((input * (9/5)) + 32)
         }
         else if outputTemperatureType == "°K" {
-            return (inputValue - 273.15)
+            return (input - 273.15)
         }
         else {
             print("error")
